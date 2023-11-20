@@ -1,3 +1,10 @@
+<?php
+$query = 'SELECT * FROM postits';
+$response = $bdd->query($query);
+
+$datas = $response->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,41 +30,22 @@
     <main>
         <div id="title_memento">
             <h2>Memento</h2>
-            <button class="create_postit">Add Postit</button>
+            <a href="postit_creator.php">Add Postit</a>
             <div id="postit_grid">
+                <?php foreach($datas as $data) {?>
                 <article>
                     <div class="postit_header">
-                        <h3>Test Postit</h3>
+                        <h3><?= $data['title'] ?></h3>
                         <button class="postit_delete">X</button>
                     </div>
-                    <p>content</p>
+                    <p><?= $data['content'] ?></p>
                     <div class="postit_footer">
-                        <p>dd/MM/YYYY hh:mm</p>
+                        <p><?= $data['date'] ?></p>
                     </div>
                 </article>
-                <article>
-                    <div class="postit_header">
-                        <h3>Test Postit</h3>
-                        <button class="postit_delete">X</button>
-                    </div>
-                    <p>content</p>
-                    <div class="postit_footer">
-                        <p>dd/MM/YYYY hh:mm</p>
-                    </div>
-                </article>
-                <article>
-                    <div class="postit_header">
-                        <h3>Test Postit</h3>
-                        <button class="postit_delete">X</button>
-                    </div>
-                    <p>content</p>
-                    <div class="postit_footer">
-                        <p>dd/MM/YYYY hh:mm</p>
-                    </div>
-                </article>
+                <?php } ?>
             </div>
         </div>
-
     </main>
     <footer>
 
