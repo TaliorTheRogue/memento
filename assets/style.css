@@ -1,0 +1,24 @@
+body{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+nav {
+    display: flex
+}
+
+.userlinks {
+    justify-content: end;
+}
+
+#postit_grid {
+    display: flex;
+}
+
+article {
+    box-sizing: content-box;
+    border: solid black;
+    width : 16rem;
+    height: 20rem;
+    padding: 2rem;
+}
