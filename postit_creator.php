@@ -10,17 +10,12 @@
 
     if($_SERVER['REQUEST_METHOD']=== 'POST'){
         $req = $bdd->prepare('INSERT INTO postits(title, content, date) VALUES(:title, :content, :date)');
-        $req->execute(array(
-            ':title' => $_POST['title'],
-            ':content' => $_POST['content'],
-            ':date' => $_POST['date'],
-        ));
         if($req->execute(array(
             ':title' => $_POST['title'],
             ':content' => $_POST['content'],
             ':date' => $_POST['date'],
             ))){
-        echo 'Votre postit a bien été créé !';
+        echo 'Your postit has been created !';
         }
     }
 ?>
@@ -43,8 +38,8 @@
                 <h1>Memento</h1>
                 <div class="userlinks">
                     <a href="index.php" title="Home">Home</a>
-                    <a href="#" title="Login">Login</a>
-                    <a href="#" title="Register">Register</a>
+                    <a href="login.php" title="Login">Login</a>
+                    <a href="register.php" title="Register">Register</a>
                 </div>
             </nav>
         </header>

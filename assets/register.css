@@ -20,15 +20,9 @@ form input{
     border-radius: 10px;
 }
 
-form textarea {
-    width: 24rem;
-    height: 20rem;
-    border-radius: 10px;
-}
-
 form button {
     margin-top : 2rem;
     border-radius: 10px;
-    width: 7rem;
-    height: 4rem;
+    width: 5rem;
+    height: 2rem;
 }

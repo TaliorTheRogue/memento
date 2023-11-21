@@ -11,6 +11,8 @@ $query = 'SELECT * FROM postits';
 $response = $bdd->query($query);
 
 $datas = $response->fetchAll();
+
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +32,8 @@ $datas = $response->fetchAll();
         <nav>
             <h1>Memento</h1>
             <div class="userlinks">
-                <a href="#" title="Login">Login</a>
-                <a href="#" title="Register">Register</a>
+                <a href="login.php" title="Login">Login</a>
+                <a href="register.php" title="Register">Register</a>
             </div>
         </nav>
     </header>
