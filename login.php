@@ -1,4 +1,5 @@
 <?php
+session_start();
  try
  {
  $bdd = new PDO('mysql:host=localhost;dbname=memento;charset=utf8', 'root', '');
@@ -8,21 +9,21 @@
  die('Erreur : ' . $e->getMessage());
  }
 
-$accounts = 'SELECT email, password FROM users';
+$accounts = 'SELECT email, username, password FROM users';
 $response = $bdd->query($accounts);
 $datas = $response->fetchAll();
-foreach($datas as $data){
-}
 
 
 if($_SERVER['REQUEST_METHOD']=== 'POST'){
-        if($data['email']===$_POST['email'] || $data['password']===$_POST['password']){
-            $_SESSION['login']=true;
+    foreach($datas as $data){
+        if($data['email']===$_POST['email'] && $data['password']===$_POST['password']){
+            $_SESSION['connected']=true;
             header('location:index.php');
         }else{
             echo "Wrong email and/or password";
         }
     }
+}
 
 ?>
 

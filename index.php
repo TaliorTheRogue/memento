@@ -1,4 +1,10 @@
 <?php
+session_start();
+if(isset($_SESSION['connected'])){
+}else{
+    $_SESSION['connected']=false;
+}
+
 try
 {
 $bdd = new PDO('mysql:host=localhost;dbname=memento;charset=utf8', 'root', '');
@@ -12,7 +18,7 @@ $response = $bdd->query($query);
 
 $datas = $response->fetchAll();
 
-session_start();
+var_dump($_SESSION['connected']);
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +38,11 @@ session_start();
         <nav>
             <h1>Memento</h1>
             <div class="userlinks">
-                <a href="login.php" title="Login">Login</a>
+                <?php if($_SESSION['connected']===false){ ?>
+                    <a href="login.php" title="Login">Login</a>
+                <?php }else{ ?>
+                    <a href="logout.php" title="Logout">Logout</a>
+                <?php } ?>
                 <a href="register.php" title="Register">Register</a>
             </div>
         </nav>
@@ -40,21 +50,25 @@ session_start();
     <main>
         <div id="title_memento">
             <h2>Memento</h2>
-            <a href="postit_creator.php">Add Postit</a>
-            <div id="postit_grid">
-                <?php foreach($datas as $data) {?>
-                <article>
-                    <div class="postit_header">
-                        <h3><?= $data['title'] ?></h3>
-                        <button class="postit_delete">X</button>
-                    </div>
-                    <p><?= $data['content'] ?></p>
-                    <div class="postit_footer">
-                        <p><?= $data['date'] ?></p>
-                    </div>
-                </article>
-                <?php } ?>
-            </div>
+            <?php if($_SESSION['connected']===true){ ?>
+                <a href="postit_creator.php">Add Postit</a>
+                <div id="postit_grid">
+                    <?php foreach($datas as $data) {?>
+                    <article>
+                        <div class="postit_header">
+                            <h3><?= $data['title'] ?></h3>
+                            <button class="postit_delete">X</button>
+                        </div>
+                        <p><?= $data['content'] ?></p>
+                        <div class="postit_footer">
+                            <p><?= $data['date'] ?></p>
+                        </div>
+                    </article>
+                    <?php } ?>
+                </div>
+            <?php }else{ ?>
+                <p>You need to be logged in to view or create postits.</p>
+            <?php } ?>
         </div>
     </main>
     <footer>
